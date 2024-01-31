@@ -52,7 +52,7 @@ app.use("/", api);
 // catch 404 and forward to error handler
 app.all(
   "*",
-  catchAsync(async (req, res) => {
+  catchAsync(async () => {
     throw new AppError("route not found", 404);
   }),
 );

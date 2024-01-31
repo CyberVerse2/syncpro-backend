@@ -13,5 +13,5 @@ export const projectRouter = Router();
 projectRouter.get("/:projectId", httpGetProject);
 projectRouter.post("/new", httpNewProject);
 projectRouter.get("/:teamId", httpGetTeamProjects);
-projectRouter.put("/:projectId", httpUpdateProject);
+projectRouter.patch("/:projectId", httpUpdateProject);
 projectRouter.delete("/:projectId", httpDeleteProject);
