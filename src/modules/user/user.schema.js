@@ -1,49 +1,49 @@
-import mongoose from 'mongoose';
-import { hashData } from '../../common/utils/helper.js';
+import mongoose from "mongoose";
+import { hashData } from "../../common/utils/helper.js";
 
 const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
       required: true,
-      unique: false
+      unique: false,
     },
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
 
     password: {
       type: String,
       required: true,
-      unique: false
+      unique: false,
     },
     refreshToken: {
       type: String,
-      required: false
+      required: false,
     },
-    teams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
+    teams: [{ type: mongoose.Schema.Types.ObjectId, ref: "Team" }],
 
     isTermsAccepted: {
       type: Boolean,
       required: true,
-      unique: false
+      unique: false,
     },
     lastLogin: {
       type: Date,
-      required: true
+      required: true,
     },
     isDeleted: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
     return next();
   }
 
@@ -62,7 +62,6 @@ userSchema.pre(/^find/, function (next) {
   next();
 });
 
-
 // Use pre-update hook to hash the password before updating the document
 userSchema.pre(/^update/, async function (next) {
   // 'this' refers to the query being executed (e.g., findOneAndUpdate)
@@ -80,4 +79,4 @@ userSchema.pre(/^update/, async function (next) {
   }
 });
 
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model("User", userSchema);
