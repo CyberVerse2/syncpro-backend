@@ -1,7 +1,7 @@
-import { randomBytes } from "crypto";
-import { compare, hash } from "bcrypt";
-import { ENVIRONMENT } from "../config/environment.js";
-import jwt from "jsonwebtoken";
+import { randomBytes } from 'crypto';
+import { compare, hash } from 'bcrypt';
+import { ENVIRONMENT } from '../config/environment.js';
+import jwt from 'jsonwebtoken';
 // import { ValidationError, validate } from "class-validator";
 // import AppError from "./appError.js";
 
@@ -12,7 +12,7 @@ import jwt from "jsonwebtoken";
  * @return {string} - The generated random string.
  */
 export function generateRandomString(length) {
-  return randomBytes(length).toString("hex");
+  return randomBytes(length).toString('hex');
 }
 
 export const hashData = async (data) => {
@@ -27,7 +27,7 @@ export const compareData = async (data, hashedData) => {
 
 export const signData = (data, secret, expiresIn) => {
   return jwt.sign({ ...data }, secret, {
-    expiresIn,
+    expiresIn
   });
 };
 
@@ -35,17 +35,21 @@ export const decodeData = (token, secret) => {
   return jwt.verify(token, secret);
 };
 
-export const setCookie = (
-  res,
-  name,
-  value,
-  options = {},
-) => {
+export const setCookie = (res, name, value, options = {}) => {
   res.cookie(name, value, {
     httpOnly: true,
-    secure: ENVIRONMENT.APP.ENV === "production",
-    path: "/",
-    sameSite: "none",
-    ...options,
+    secure: ENVIRONMENT.APP.ENV === 'production',
+    path: '/',
+    sameSite: 'none',
+    ...options
   });
+};
+
+export const generateTeamCode = function () {
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let code = [];
+  for (let i = 0; i <= 6; i++) {
+    code.push(letters[Math.floor(Math.random() * letters.length)]).join('')
+  }
+  return code;
 };
