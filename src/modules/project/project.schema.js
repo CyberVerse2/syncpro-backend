@@ -4,8 +4,9 @@ import mongoose from "mongoose";
 const projectSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    description: { type: String },
-    teamCode: { type: String },
+    banner: { type: String, required: true },
+    description: { type: String, required: true },
+    teamCode: { type: String, required: true },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

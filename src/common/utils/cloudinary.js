@@ -3,9 +3,9 @@ import { v2 as cloudinary } from "cloudinary";
 import AppError from "./appError.js";
 
 cloudinary.config({
-  cloud_name: ENVIRONMENT.API.CLOUDINARY.CLOUD_NAME,
-  api_key: ENVIRONMENT.API.CLOUDINARY.API_KEY,
-  api_secret: ENVIRONMENT.API.CLOUDINARY.API_SECRET,
+  cloud_name: ENVIRONMENT.CLOUDINARY.CLOUD_NAME,
+  api_key: ENVIRONMENT.CLOUDINARY.API_KEY,
+  api_secret: ENVIRONMENT.CLOUDINARY.API_SECRET,
 });
 
 export function validateImage(file) {
@@ -22,7 +22,7 @@ export function validateImage(file) {
   }
 }
 
-export function uploadFile(area, type, file) {
+export function uploadFile(area, file) {
   try {
     return new Promise((resolve, reject) => {
       validateImage(file);

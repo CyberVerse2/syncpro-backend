@@ -24,7 +24,7 @@ export const httpAddMemberToTeam = catchAsync(async (req, res) => {
   return AppResponse(res, 201, newMember, "User added successfully");
 });
 
-export const updateMemberRole = catchAsync(async (req, res) => {
+export const httpUpdateMemberRole = catchAsync(async (req, res) => {
   const { memberId, role } = req.query;
   if (!memberId || !role) throw new AppError(`Please input the required fields`, 400);
   const member = await updateMember(memberId, { role })
