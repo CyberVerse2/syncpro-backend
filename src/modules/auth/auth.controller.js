@@ -13,7 +13,7 @@ export const httpSignUp = catchAsync(async (req, res) => {
   const { username, email, password, role, isTermsAccepted, lastLogin } = req.body;
 
   // Validate user data
-  if ((!username || !email || !password || !isTermsAccepted || !lastLogin)) {
+  if ((!username || !email || !password || !isTermsAccepted)) {
     throw new AppError("All fields are required", 400);
   }
 
