@@ -17,8 +17,8 @@ export const httpGetCurrentUser = catchAsync(async (req, res) => {
 export const httpUpdateUser = catchAsync(async (req, res) => {
   const { user } = req;
   const { username, email, password } = req.body;
-  if (username || email || password) {
-    throw new AppError("At least one field is required", 400);
+  if (!(username || email || password)) {
+    throw new AppError('At least one field is required', 400);
   }
   const updatedUser = await updateUser(user.id, req.body);
   if (!updatedUser) {

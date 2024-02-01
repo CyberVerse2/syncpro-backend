@@ -38,7 +38,7 @@ export const decodeData = (token, secret) => {
 export const setCookie = (res, name, value, options = {}) => {
   res.cookie(name, value, {
     httpOnly: true,
-    secure: ENVIRONMENT.APP.ENV === "production",
+    secure: ENVIRONMENT.APP.ENV === "prod",
     path: "/",
     sameSite: "none",
     ...options,
