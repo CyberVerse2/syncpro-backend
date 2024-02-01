@@ -2,6 +2,7 @@ import { catchAsync } from "../../common/utils/errorHandler.js";
 import { AppResponse } from "../../common/utils/appResponse.js";
 import AppError from "../../common/utils/appError.js";
 import {
+  assignTaskToMember,
   createNewTask,
   deleteTask,
   getProjectTasks,
@@ -44,6 +45,14 @@ export const httpGetTaskById = catchAsync(async (req, res) => {
   if (!task) throw new AppError("Task with the id not found", 400);
   return AppResponse(res, 200, task, "Task fetched successfully");
 });
+
+export const httpAssignTaskToMember = catchAsync(async (req, res) => {
+  const { taskId, memberId } = req.query;
+  if (!taskId || !memberId)
+    throw new AppError(`Please input the required fields`, 400);
+const assignedTask = await assignTaskToMember(taskId, memberId);
+  return AppResponse(res, 200, assignedTask, `Task assigned successfully`);
+})
 
 export const httpUpdateTask = catchAsync(async (req, res) => {
   const { taskId } = req.params;

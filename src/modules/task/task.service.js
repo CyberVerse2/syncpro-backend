@@ -1,5 +1,6 @@
 import AppError from '../../common/utils/appError.js';
 import { Project } from '../project/project.schema.js';
+import { findMember } from '../member/member.service.js';
 import { Task } from './task.schema.js';
 
 export async function createNewTask(projectId, title, description, deadline, priority) {
@@ -27,6 +28,16 @@ export const getProjectTasks = async (projectId) => {
 
 export async function getTaskById(taskId) {
   const task = await Task.findById(taskId);
+  return task;
+}
+
+export async function assignTaskToMember(taskId, memberId) {
+  const member = await findMember('id', memberId);
+  if (!member) throw new AppError(`Member with the id not found`, 404);
+  const task = await updateTask(taskId, { assignedTo: memberId });
+  if (!task) throw new AppError(`Task with the id not found`, 404);
+  member.tasks.push(task);
+  await member.save();
   return task;
 }
 
