@@ -44,7 +44,6 @@ app.use((req, res, next) => {
  * Initialize routes
  */
 app.use("/api/v1", api);
-app.use(handleError)
 
 // catch 404 and forward to error handler
 app.all(
@@ -58,6 +57,7 @@ app.all(
  * Error handler middlewares
 */
 app.use(timeoutMiddleware);
+app.use(handleError)
 
 /**
  * status check
