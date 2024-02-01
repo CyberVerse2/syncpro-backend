@@ -10,11 +10,11 @@ import { EntityTransformer } from "../../common/transformers/entityTransformer.j
 // Signup route
 export const httpSignUp = catchAsync(async (req, res) => {
   // Extract user data from request body
-  const { username, email, password, role } = req.body;
+  const { username, email, password, role, isTermsAccepted, lastLogin } = req.body;
 
   // Validate user data
-  if (!(username || !email || !password)) {
-    return res.status(400).json({ message: "All fields are required" });
+  if ((!username || !email || !password || !isTermsAccepted || !lastLogin)) {
+    throw new AppError("All fields are required", 400);
   }
 
   // Check if user already exists in the database
@@ -29,6 +29,8 @@ export const httpSignUp = catchAsync(async (req, res) => {
     email,
     password,
     role: role || "member",
+    isTermsAccepted,
+    lastLogin: new Date(),
   });
 
   // Return success response

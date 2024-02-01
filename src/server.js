@@ -1,11 +1,7 @@
 import { ENVIRONMENT } from "./common/config/environment.js";
 import express from "express";
 import AppError from "./common/utils/appError.js";
-import {
-  catchAsync,
-  handleError,
-  timeoutMiddleware,
-} from "./common/utils/errorHandler.js";
+import { catchAsync, handleError, timeoutMiddleware } from "./common/utils/errorHandler.js";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
@@ -47,7 +43,8 @@ app.use((req, res, next) => {
 /**
  * Initialize routes
  */
-app.use("/", api);
+app.use("/api/v1", api);
+app.use(handleError)
 
 // catch 404 and forward to error handler
 app.all(
@@ -59,9 +56,8 @@ app.all(
 
 /**
  * Error handler middlewares
- */
+*/
 app.use(timeoutMiddleware);
-app.use(handleError);
 
 /**
  * status check

@@ -17,7 +17,7 @@ export const catchAsync = (fn) => {
 /**
  * Error handler
  */
-export const handleError = (err, req, res) => {
+export const handleError = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "Something went wrong";
   err.data = err.data || null;
