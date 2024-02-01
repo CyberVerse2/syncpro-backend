@@ -9,8 +9,8 @@ import { memberRouter } from "./modules/member/member.router.js";
 export const api = Router();
 
 api.use("/auth", authRouter);
-api.use("/user", userRouter);
-api.use("/team", teamRouter);
+api.use("/users", userRouter);
+api.use("/teams", teamRouter);
 api.use('/tasks', taskRouter);
 api.use("/members", memberRouter);
 api.use("/projects", projectRouter);
