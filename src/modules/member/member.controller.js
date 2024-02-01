@@ -12,7 +12,9 @@ export const httpAddMemberToTeam = catchAsync(async (req, res) => {
   const team = await findTeam("code", teamCode);
   if (!team) throw new AppError("Team with the code not found", 404);
 
-  const isMember = team.members.find((member) => member.user.toString() === user.id);
+  const isMember = team.members.find(
+    (member) => member.user.toString() === user.id,
+  );
   if (isMember) throw new AppError("User is already a member of the team", 400);
 
   const newMember = await createNewMember({ team, user: user.id });
@@ -26,14 +28,14 @@ export const httpAddMemberToTeam = catchAsync(async (req, res) => {
 
 export const httpUpdateMemberRole = catchAsync(async (req, res) => {
   const { memberId, role } = req.query;
-  if (!memberId || !role) throw new AppError(`Please input the required fields`, 400);
-  const member = await updateMember(memberId, { role })
+  if (!memberId || !role)
+    throw new AppError(`Please input the required fields`, 400);
+  const member = await updateMember(memberId, { role });
   if (!member) throw new AppError(`Member with the id not found`, 404);
   member.role = role;
   await member.save();
   return AppResponse(res, 200, member, `Member role updated successfully`);
-})
-
+});
 
 export const httpGetTeamMembers = catchAsync(async (req, res) => {
   const { teamId } = req.params;

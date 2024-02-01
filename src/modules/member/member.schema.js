@@ -9,7 +9,6 @@ const memberSchema = new mongoose.Schema(
       default: "member",
     },
     team: { type: mongoose.Schema.Types.ObjectId, ref: "Team" },
-    projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
     tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
     // Other member-related fields
   },

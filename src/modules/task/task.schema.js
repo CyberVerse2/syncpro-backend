@@ -9,6 +9,11 @@ const taskSchema = new mongoose.Schema({
     required: true,
   },
   assignedTo: { type: mongoose.Schema.Types.ObjectId, ref: "Member" },
+  priority: {
+    type: String,
+    enum: ["low", "medium", "high"],
+    default: "low",
+  },
   progress: {
     type: String,
     enum: ["started", "in progress", "completed"],
@@ -18,6 +23,5 @@ const taskSchema = new mongoose.Schema({
   // Other task-related fields
 });
 
-const Task = mongoose.model("Task", taskSchema);
+export const Task = mongoose.model("Task", taskSchema);
 
-module.exports = Task;

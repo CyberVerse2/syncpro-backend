@@ -10,7 +10,9 @@ export async function findMember(field, value) {
   return member;
 }
 
-export async function updateMember(memberId, body){
-  const updatedMember =await Member.findByIdAndUpdate(memberId, body, {new: true});
+export async function updateMember(memberId, body) {
+  const updatedMember = await Member.findByIdAndUpdate(memberId, body, {
+    new: true,
+  });
   return updatedMember;
 }
