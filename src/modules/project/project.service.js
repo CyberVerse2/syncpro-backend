@@ -1,27 +1,24 @@
-import { Project } from "./project.schema.js";
+import { Project } from './project.schema.js';
 
-export async function newProject(userId, title, description, code, deadline) {
+export async function newProject(userId, title, description, team, deadline) {
   const newProject = await Project.create({
+    owner: userId,
     title,
     description,
-    code,
-    owner: userId,
-    deadline,
+    team,
+    deadline: new Date(deadline)
   });
   return newProject;
 }
 
 export async function getProject(projectId) {
-  const project = await Project.findById(projectId)
-    .populate("tasks")
-    .populate("members")
-    .exec();
+  const project = await Project.findById(projectId).populate('tasks').populate('members').exec();
   return project;
 }
 
 export async function updateProject(projectId, body) {
   const updatedProject = await Project.findByIdAndUpdate(projectId, body, {
-    new: true,
+    new: true
   });
   return updatedProject;
 }

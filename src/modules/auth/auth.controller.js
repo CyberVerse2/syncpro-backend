@@ -52,6 +52,7 @@ export const httpLogin = catchAsync(async (req, res) => {
     ENVIRONMENT.JWT.ACCESS_KEY,
     ENVIRONMENT.JWT_EXPIRES_IN.ACCESS
   );
+
   setCookie(res, 'accessToken', accessToken, { maxAge: 15 * 60 * 1000 });
   console.log(user);
   const refreshToken = signData(

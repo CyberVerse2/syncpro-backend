@@ -6,8 +6,11 @@ import {
   httpGetTaskById,
   httpUpdateTask
 } from './task.controller.js';
+import { protect } from '../../common/middlewares/protect.js';
 
 export const taskRouter = Router();
+
+taskRouter.use(protect)
 
 taskRouter.get('/', httpGetProjectTasks);
 taskRouter.get('/:taskId', httpGetTaskById);

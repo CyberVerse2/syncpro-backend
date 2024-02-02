@@ -4,9 +4,12 @@ import {
   httpGetTeamMembers,
   httpUpdateMemberRole,
 } from "./member.controller.js";
+import { protect } from "../../common/middlewares/protect.js";
 
 export const memberRouter = Router();
 
+memberRouter.use(protect)
+
 memberRouter.get("/:teamId", httpGetTeamMembers);
-memberRouter.post("/:teamId/member/add", httpAddMemberToTeam);
-memberRouter.patch("/:teamId/role/update", httpUpdateMemberRole);
+memberRouter.post('/add/:teamCode', httpAddMemberToTeam);
+memberRouter.patch("/role/update", httpUpdateMemberRole);

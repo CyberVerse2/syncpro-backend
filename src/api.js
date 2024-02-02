@@ -11,6 +11,6 @@ export const api = Router();
 api.use("/auth", authRouter);
 api.use("/users", userRouter);
 api.use("/teams", teamRouter);
-api.use('/tasks', taskRouter);
 api.use("/members", memberRouter);
 api.use("/projects", projectRouter);
+api.use('/tasks', taskRouter);

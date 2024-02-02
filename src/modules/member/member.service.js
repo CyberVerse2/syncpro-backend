@@ -1,4 +1,4 @@
-import { Member } from "./member.schema.js";
+import { Member } from './member.schema.js';
 // import AppError from "../../common/utils/appError.js";
 
 export async function createNewMember(body) {
@@ -12,7 +12,7 @@ export async function findMember(field, value) {
 
 export async function updateMember(memberId, body) {
   const updatedMember = await Member.findByIdAndUpdate(memberId, body, {
-    new: true,
+    new: true
   });
   return updatedMember;
 }

@@ -7,7 +7,7 @@ export async function createNewTask(projectId, title, description, deadline, pri
   const currentProject = await Project.findById(projectId);
   if (!currentProject) throw new AppError('Project with the id not found', 404);
   const task = await Task.create({
-    projectId,
+    project: projectId,
     title,
     description,
     deadline,
@@ -32,7 +32,7 @@ export async function getTaskById(taskId) {
 }
 
 export async function assignTaskToMember(taskId, memberId) {
-  const member = await findMember('id', memberId);
+  const member = await findMember('_id', memberId);
   if (!member) throw new AppError(`Member with the id not found`, 404);
   const task = await updateTask(taskId, { assignedTo: memberId });
   if (!task) throw new AppError(`Task with the id not found`, 404);

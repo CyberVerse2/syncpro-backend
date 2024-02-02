@@ -7,12 +7,15 @@ import {
   httpUploadProjectBanner,
   httpUpdateProject,
 } from "./project.controller.js";
+import { protect } from "../../common/middlewares/protect.js";
 
 export const projectRouter = Router();
 
+projectRouter.use(protect)
+
 projectRouter.get("/:projectId", httpGetProjectById);
-projectRouter.get("/:teamId", httpGetTeamProjects);
-projectRouter.post("/", httpNewProject);
+projectRouter.get("/team/:teamId", httpGetTeamProjects);
+projectRouter.post("/:teamId", httpNewProject);
 projectRouter.patch("/:projectId/banner/upload", httpUploadProjectBanner);
 projectRouter.patch("/:projectId", httpUpdateProject);
 projectRouter.delete("/:projectId", httpDeleteProject);

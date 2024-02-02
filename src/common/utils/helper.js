@@ -49,7 +49,8 @@ export const generateTeamCode = function () {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let code = [];
   for (let i = 0; i <= 6; i++) {
-    code.push(letters[Math.floor(Math.random() * letters.length)]).join("");
+    const letter = letters[Math.floor(Math.random() * letters.length)];
+    code.push(letter)
   }
-  return code;
+  return code.join('');;
 };
