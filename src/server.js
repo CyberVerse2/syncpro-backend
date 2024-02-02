@@ -9,6 +9,8 @@ import { stream } from './common/utils/logger.js';
 import morgan from 'morgan';
 import { connectDb } from './common/config/database.js';
 import { api } from './api.js';
+// import swaggerJSDoc from 'swagger-jsdoc';
+// import swaggerUi from 'swagger-ui-express';
 
 /**
  * Default app configurations
@@ -33,6 +35,9 @@ app.use(
     credentials: true
   })
 );
+
+// const specs = swaggerJSDoc(options);
+// app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.disable('x-powered-by');
